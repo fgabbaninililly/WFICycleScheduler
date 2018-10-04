@@ -19,6 +19,11 @@ Thumbs.db
 *.cache
 *.ilk
 *.log
+*.xlsx
+*.old
+
+UI/*.py
+
 [Bb]in
 [Dd]ebug*/
 *.lib

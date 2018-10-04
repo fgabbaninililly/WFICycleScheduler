@@ -24,18 +24,20 @@ Cycle_Tags.index = range(len(Cycle_Tags))
 #Cycles
 Cycles = pd.read_excel('Variables.xlsx',sheet_name ='Cycles')
 Du=Cycles['Duration (m)']
-Du=Du.drop([14,16,18])
+#Du=Du.drop([14,16,18])
 Du.index = range(len(Du))
 nb_Cycles=len(Du)
 De=Cycles['delay from start cycle (m)']
-De=De.drop([14,16,18])
+#De=De.drop([14,16,18])
 De.index = range(len(De))
 Components=Cycles['Component']
-Components=Components.drop([14,16,18])
+#Components=Components.drop([14,16,18])
 Components=np.array(Components)
 Cyclenames=Cycles['Cycle']
-Cyclenames=Cyclenames.drop([14,16,18])
+#Cyclenames=Cyclenames.drop([14,16,18])
 Cyclenames=np.array(Cyclenames)
+Subphasesnames=np.array(Cycles['SubPhase'],dtype=str)
+#=np.array(Subphasesnames.drop([14,16,18]))
 CF=Cycles['WFI Flow OSI_PI o rossi (l/15min)']
-CF=CF.drop([14,16,18])
+#CF=CF.drop([14,16,18])
 CF=np.array(CF)
