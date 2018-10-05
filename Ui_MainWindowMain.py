@@ -8,7 +8,7 @@ from CycleScheduler import *
 #Move this into unit testing project when convenient
 def testParameterIntitalization():
     context = Context()
-    context.setConfigurationParameters(ConfigurationParameters.createFromExcel("D:\Projects\Python\WFI_opti_design\Variables.xlsx", "D:\Projects\Python\WFI_opti_design\Tags.xlsx"))
+    context.setConfigurationParameters(ConfigurationParameters.createFromExcel(".\config\Variables.xlsx", ".\config\Tags.xlsx"))
 
     #test if row from Variables.xlsx!Cycles is correctly read
     #Component	Cycle	    SubPhase	    Duration (m)	WFI Flow OSI_PI o rossi (l/15min)	delay from start cycle (m)
@@ -87,8 +87,8 @@ def testParameterIntitalization():
 if __name__ == "__main__":
     import sys
 
-    configurationParameters = ConfigurationParameters.createFromExcel("D:\Projects\Python\WFI_opti_design\Variables.xlsx",
-                                            "D:\Projects\Python\WFI_opti_design\Tags.xlsx")
+    configurationParameters = ConfigurationParameters.createFromExcel(".\config\Variables.xlsx", ".\config\Tags.xlsx")
+	
     context = Context()
     context.setConfigurationParameters(configurationParameters)
 

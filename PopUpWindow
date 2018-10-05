@@ -1,7 +1,0 @@
-from PyQt5 import QtGui
-
-class MyPopupDialog(QtGui.QDialog):
-    def __init__(self, parent=None):
-        return 0
-        # Regular init stuff...
-        # and other things you might want

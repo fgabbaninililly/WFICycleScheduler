@@ -23,6 +23,7 @@ Thumbs.db
 *.old
 
 UI/*.py
+_oldfiles
 
 [Bb]in
 [Dd]ebug*/
