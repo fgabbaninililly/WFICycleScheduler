@@ -85,12 +85,19 @@ class OSIPIReader :
             tagName = OSIPIReader.readTag(tagNames[i])
             cycleName = tagName.getValue()
             componentName = tagComponentNames[i]
-            if not(self.context.cycleConsumesWater(componentName, cycleName)):
+
+            if not (self.context.isCycleNameValid(cycleName)):
                 continue
+            if not (self.context.isComponentNameValid(componentName)):
+                continue
+
             subPhaseName = subPhases[np.where((componentName == components) & (cycles == cycleName))[0][0]]
             phase = self.context.getCyclePhaseFromNames(componentName, cycleName, subPhaseName)
 
-            #Intancing a scheduled phse as running cycles are already scheduled
+            if not (phase.wfiConsumption > 0):
+                continue
+
+            #Instancing a scheduled phse as running cycles are already scheduled
             scheduledPhase = ScheduledPhase()
             scheduledPhase.initFromRunningPhase(phase,actualTime,tagName.getTimeFromNowMinutes())
 
@@ -116,23 +123,24 @@ class OSIPIReader :
         tagName = OSIPIReader.readTag(W721_PNAME)
         cycleName = tagName.getValue()
         componentName = W721_COMPONENT
-        if (int(tagActive.getValue()) == 1)&(self.context.cycleConsumesWater(componentName, cycleName)):
-            subPhaseName = subPhases[np.where((componentName == components) & (cycles == cycleName))[0][0]]
-            phase = self.context.getCyclePhaseFromNames(componentName, cycleName, subPhaseName)
+        subPhaseName = subPhases[np.where((componentName == components) & (cycles == cycleName))[0][0]]
+        phase = self.context.getCyclePhaseFromNames(componentName, cycleName, subPhaseName)
+        if ((int(tagActive.getValue()) == 1) & (phase.wfiConsumption > 0)):
             scheduledPhase = ScheduledPhase()
-            scheduledPhase.initFromRunningPhase(phase,actualTime,tagName.getTimeFromNowMinutes())
+            scheduledPhase.initFromRunningPhase(phase, actualTime, tagName.getTimeFromNowMinutes())
             runningCycles.append(scheduledPhase)
 
         tagActive = OSIPIReader.readTag(W731_ACTIVE)
         tagName = OSIPIReader.readTag(W731_PNAME)
         cycleName = tagName.getValue()
         componentName = W731_COMPONENT
-        if (int(tagActive.getValue()) == 1)&(self.context.cycleConsumesWater(componentName, cycleName)):
-            subPhaseName = subPhases[np.where((componentName == components) & (cycles == cycleName))[0][0]]
-            phase = self.context.getCyclePhaseFromNames(componentName, cycleName, subPhaseName)
+        subPhaseName = subPhases[np.where((componentName == components) & (cycles == cycleName))[0][0]]
+        phase = self.context.getCyclePhaseFromNames(componentName, cycleName, subPhaseName)
+        if ((int(tagActive.getValue()) == 1) & (phase.wfiConsumption > 0)):
             scheduledPhase = ScheduledPhase()
-            scheduledPhase.initFromRunningPhase(phase,actualTime,tagName.getTimeFromNowMinutes())
+            scheduledPhase.initFromRunningPhase(phase, actualTime, tagName.getTimeFromNowMinutes())
             runningCycles.append(scheduledPhase)
+
         return runningCycles
 
     def getMS1Active(self):
