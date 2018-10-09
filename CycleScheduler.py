@@ -231,8 +231,21 @@ class Context:
             if (reqPhase.id == id):
                 return reqPhase
 
+    def cyclePhaseConsumesWater(self, cyclePhase):
+        result = True if cyclePhase.wfiConsumption > 0 else False
+        return result
+
     def cycleConsumesWater(self, componentName, cycleName):
         return (componentName in self.configurationParameters.getComponents()) & (cycleName in self.configurationParameters.getCycles())
+
+    def isComponentNameValid(self, componentName):
+        return (componentName in self.configurationParameters.getComponents())
+
+    def isCycleNameValid(self, cycleName):
+        return (cycleName in self.configurationParameters.getCycles())
+
+    def isCyclePhaseNameValid(self, cyclePhaseName):
+        return (cyclePhaseName in self.configurationParameters.getSubPhases())
 
 
 class CycleScheduler :
